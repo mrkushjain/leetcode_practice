@@ -22,7 +22,13 @@
  */
 class Solution {
     public boolean isUnivalTree(TreeNode root) {
-        
+        if(root==null){
+            return true;
+        }
+        boolean isLeftUnival = (root.left==null)||(root.left.val==root.val && isUnivalTree(root.left));
+        boolean isRightUnival = (root.right==null)||(root.right.val==root.val && isUnivalTree(root.right));
+        return isLeftUnival && isRightUnival;
+
     }
 }
 // @lc code=end

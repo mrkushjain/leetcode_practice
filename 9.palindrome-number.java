@@ -7,24 +7,20 @@
 // @lc code=start
 class Solution {
     public boolean isPalindrome(int x) {
-        if(x<0){
+        //negative num are not palindrome
+        if(x<0 ||
+            (x!=0 && x%10==0) //numbers ending with zero are not pallindrome except zero
+        ){
             return false;
         }
-        int num = x;
-        int revx = 0;
-        while(num!=0){
-            revx=revx*10 + num%10;
-            num = num/10;
+        int halfRevx = 0, halfx = x;
+        //Get half reverted number
+        while(halfx>halfRevx){
+            halfRevx = halfRevx*10 + halfx%10;
+            halfx= halfx/10;
         }
-        num =x;
-        while(num!=0 && revx!=0){
-            if(num%10 != revx%10){
-                return false;
-            }
-            num = num /10;
-            revx = revx/10;
-        }
-        return true;
+        return halfx == halfRevx ||
+               halfx == halfRevx/10; //for odd digit numbers we need to remove middle num
 
     }
 }
